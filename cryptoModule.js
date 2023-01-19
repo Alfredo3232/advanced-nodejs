@@ -1,3 +1,7 @@
+process.env.UV_THREADPOOL_SIZE = 2;
+// this tells libuv that whenever it creates its threadpool,
+// it should only create two threads inside there
+
 const crypto = require('crypto');
 
 const start = Date.now();
