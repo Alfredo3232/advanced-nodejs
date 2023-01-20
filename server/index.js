@@ -1,19 +1,28 @@
-const express = require('express');
+const cluster = require('cluster');
 
-const app = express();
+// is the file being executed in master mode ?
+if (cluster.isMaster) {
+    // cause index.js to be executed again, but in child mode
+    cluster.fork();
+} else {
+    // now this is running as child and this is going to run like a normal server
+    const express = require('express');
 
-function doWork(duration) {
-    const start = Date.now();
-    while (Date.now() - start < duration) {
+    const app = express();
 
+    function doWork(duration) {
+        const start = Date.now();
+        while (Date.now() - start < duration) {
+
+        }
     }
+
+    app.get('/', () => {
+        doWork(5000);
+        res.send('Hi there');
+    });
+
+    app.listen(3000, () => {
+        console.log('Listening on port', 3000);
+    });
 }
-
-app.get('/', () => {
-    doWork(5000);
-    res.send('Hi there');
-});
-
-app.listen(3000, () => {
-    console.log('Listening on port', 3000);
-});
