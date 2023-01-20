@@ -2,14 +2,15 @@ const express = require('express');
 
 const app = express();
 
-function doWork(durations) {
+function doWork(duration) {
     const start = Date.now();
     while (Date.now() - start < duration) {
-        
+
     }
 }
 
 app.get('/', () => {
+    doWork(5000);
     res.send('Hi there');
 });
 
