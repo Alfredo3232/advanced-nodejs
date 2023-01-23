@@ -8,7 +8,7 @@ if (cluster.isMaster) {
 } else {
     // now this is running as child and this is going to run like a normal server
     const express = require('express');
-    const crpyto = require('crypto');
+    const crypto = require('crypto');
 
     const app = express();
 
